@@ -1,0 +1,77 @@
+R1AR1#sh ip ospf database external 
+
+            OSPF Router with ID (3.3.3.3) (Process ID 1)
+
+                Type-5 AS External Link States
+
+  Routing Bit Set on this LSA
+  LS age: 794
+  Options: (No TOS-capability, DC)
+  LS Type: AS External Link
+  Link State ID: 10.3.3.0 (External Network Number )
+  Advertising Router: 2.2.2.2
+  LS Seq Number: 80000001
+  Checksum: 0xc5e2
+  Length: 36
+  Network Mask: /24
+        Metric Type: 2 (Larger than any link state path)
+        TOS: 0
+        Metric: 20
+        Forward Address: 0.0.0.0
+        External Route Tag: 0
+
+  Routing Bit Set on this LSA
+  LS age: 794
+  Options: (No TOS-capability, DC)
+  LS Type: AS External Link
+  Link State ID: 172.20.0.0 (External Network Number )
+  Advertising Router: 2.2.2.2
+  LS Seq Number: 80000001
+  Checksum: 0xd81f
+  Length: 36
+  Network Mask: /24
+        Metric Type: 2 (Larger than any link state path)
+        TOS: 0
+        Metric: 20
+        Forward Address: 0.0.0.0
+        External Route Tag: 0
+
+  Routing Bit Set on this LSA
+  LS age: 794
+  Options: (No TOS-capability, DC)
+  LS Type: AS External Link
+  Link State ID: 172.20.1.0 (External Network Number )
+  Advertising Router: 2.2.2.2
+  LS Seq Number: 80000001
+  Checksum: 0xcd29
+  Length: 36
+  Network Mask: /24
+        Metric Type: 2 (Larger than any link state path)
+        TOS: 0
+        Metric: 20
+        Forward Address: 0.0.0.0
+        External Route Tag: 0
+
+  Routing Bit Set on this LSA
+  LS age: 794
+  Options: (No TOS-capability, DC)
+  LS Type: AS External Link
+  Link State ID: 172.20.2.0 (External Network Number )
+  Advertising Router: 2.2.2.2
+  LS Seq Number: 80000001
+  Checksum: 0xc233
+  Length: 36
+  Network Mask: /24
+        Metric Type: 2 (Larger than any link state path)
+        TOS: 0
+        Metric: 20
+        Forward Address: 0.0.0.0
+        External Route Tag: 0
+		
+На обоих роутерах появились в таблице маршруты, помеченные «O E2», а в топологической базе увеличился счетчик Type-5 Ext LSA.
+Детальная информация:
+C External LSA (тип 5) все просто. Их генерирует ASBR-роутер (роутер, подключенный к внешнему домену маршрутизации и выполняющий передачу «чужих» маршрутов в OSPF) для представления внешних маршрутов, которые он передает в OSPF. Флуд по всем областям.
+Резюмируем. External LSA (тип 5):
+Генерирует ASBR.
+Представляет с их помощью «чужие» сети.
+Флуд по всем областям.

@@ -1,0 +1,42 @@
+ÈÐÓ 7
+Router RTRRIP:
+Router(config)#int s2/0
+Router(config-if)#ip address 10.3.3.2 255.255.255.0
+Router(config-if)#no shutdown 
+Router(config-if)#exit
+
+Router(config)#int loop 0
+Router(config-if)#ip address 172.20.0.1 255.255.255.0
+Router(config-if)#no shutdown 
+Router(config-if)#exit
+
+Router(config)#int loop 1
+Router(config-if)#ip address 172.20.1.1 255.255.255.0
+Router(config-if)#no shutdown 
+Router(config-if)#exit
+
+Router(config)#int loop 2
+Router(config-if)#ip address 172.20.2.1 255.255.255.0
+Router(config-if)#no shutdown 
+Router(config-if)#exit
+
+Router(config-if)#ip adr
+Router(config-if)#ip add
+Router(config-if)#ip address 172.20.2.1 255.255.255.0
+Router(config-if)#no sh
+Router(config-if)#no shutdown 
+Router(config-if)#exit
+
+Router(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#no auto-summary
+Router(config-router)#network 10.0.0.0
+Router(config-router)#network 172.20.0.0
+
+
+R2AR0(config)#router rip
+R2AR0(config-router)#version 2
+R2AR0(config-router)#network  10.0.0.0
+R2AR0(config-router)#exit
+R2AR0(config)#router ospf 1
+R2AR0(config-router)#redistribute rip subnets 
