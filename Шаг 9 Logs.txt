@@ -1,0 +1,27 @@
+ABR(config)#router ospf 1
+ABR(config-router)#no area 1 stub
+ABR(config-router)#area 1 nssa
+ABR(config-router)#default-information originate 
+
+R1AR1(config-router)#router ospf 1 
+R1AR1(config-router)#no area 1 stub
+R1AR1(config-router)#area 1 nssa
+
+ASBR(config)#router ospf 1
+ASBR(config-router)#no area 1 stub
+ASBR(config-router)#area 1 nssa
+ASBR(config-router)#redistribute static subnets 
+
+R1AR0>sh ip ro
+     10.0.0.0/24 is subnetted, 2 subnets
+C       10.1.1.0 is directly connected, Serial2/0
+C       10.2.2.0 is directly connected, FastEthernet0/0
+O IA 192.168.1.0/24 [110/128] via 10.1.1.2, 00:23:51, Serial2/0
+O IA 192.168.2.0/24 [110/192] via 10.1.1.2, 00:21:56, Serial2/0
+
+ABR>sh ip ro
+     10.0.0.0/24 is subnetted, 2 subnets
+C       10.1.1.0 is directly connected, Serial2/0
+O       10.2.2.0 [110/65] via 10.1.1.1, 00:00:15, Serial2/0
+C    192.168.1.0/24 is directly connected, Serial3/0
+O    192.168.2.0/24 [110/128] via 192.168.1.2, 00:00:10, Serial3/0
